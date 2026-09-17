@@ -65,11 +65,13 @@ document.getElementById("orderBtn").addEventListener("click", function () {
         total = 0;
 
     })
-    .catch(function (error) {
+  .catch(function (error) {
 
-        alert("Order Failed!");
-        console.log(error);
+    console.log("FULL ERROR:", error);
 
-    });
+    alert(
+        "Error: " +
+        JSON.stringify(error)
+    );
 
 });
