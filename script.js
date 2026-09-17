@@ -1,52 +1,75 @@
+emailjs.init("XEsbJLC-C4NvU9Xu41Dua");
+
 let count = 0;
 let total = 0;
 
-function addToCart(name, price){
+function addToCart(name, price) {
 
-count++;
+    count++;
+    total += price;
 
-document.getElementById("cartCount").innerText = count;
+    document.getElementById("cartCount").innerText = count;
+    document.getElementById("total").innerText = total;
 
-total += price;
+    const li = document.createElement("li");
+    li.innerText = `${name} - ₹${price}`;
 
-document.getElementById("total").innerText = total;
-
-const li = document.createElement("li");
-
-li.innerText = `${name} - ₹${price}`;
-
-document.getElementById("cartItems").appendChild(li);
+    document.getElementById("cartItems").appendChild(li);
 }
 
-document.getElementById("orderBtn").addEventListener("click",()=>{
+document.getElementById("orderBtn").addEventListener("click", function () {
 
-const name = document.getElementById("name").value;
-const phone = document.getElementById("phone").value;
-const address = document.getElementById("address").value;
+    const customerName = document.getElementById("name").value;
+    const customerPhone = document.getElementById("phone").value;
+    const customerAddress = document.getElementById("address").value;
 
-if(name==="" || phone==="" || address===""){
-alert("Please fill all details");
-return;
-}
+    if (
+        customerName === "" ||
+        customerPhone === "" ||
+        customerAddress === ""
+    ) {
+        alert("Please fill all details");
+        return;
+    }
 
-const message =
-`🎂 New Cake Order
+    if (total === 0) {
+        alert("Please add at least one cake");
+        return;
+    }
 
-Customer Name: ${name}
-Phone: ${phone}
-Address: ${address}
-Total Amount: ₹${total}`;
+    const templateParams = {
+        customer_name: customerName,
+        customer_phone: customerPhone,
+        customer_address: customerAddress,
+        total_amount: total
+    };
 
-window.open(
-`https://wa.me/919679615291?text=${encodeURIComponent(message)}`,
-"_blank"
-);
+    emailjs.send(
+        "service_te58nun",
+        "template_3mv23bg",
+        templateParams
+    )
+    .then(function () {
 
-});
+        alert("Order Sent Successfully!");
 
-Customer: ${name}
-Phone: ${phone}
-Total Amount: ₹${total}`
-);
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("address").value = "";
+
+        document.getElementById("cartItems").innerHTML = "";
+        document.getElementById("cartCount").innerText = "0";
+        document.getElementById("total").innerText = "0";
+
+        count = 0;
+        total = 0;
+
+    })
+    .catch(function (error) {
+
+        alert("Order Failed!");
+        console.log(error);
+
+    });
 
 });
