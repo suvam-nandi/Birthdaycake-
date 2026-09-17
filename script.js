@@ -21,9 +21,7 @@ document.getElementById("cartItems").appendChild(li);
 document.getElementById("orderBtn").addEventListener("click",()=>{
 
 const name = document.getElementById("name").value;
-
 const phone = document.getElementById("phone").value;
-
 const address = document.getElementById("address").value;
 
 if(name==="" || phone==="" || address===""){
@@ -31,8 +29,20 @@ alert("Please fill all details");
 return;
 }
 
-alert(
-`Order Successful!
+const message =
+`🎂 New Cake Order
+
+Customer Name: ${name}
+Phone: ${phone}
+Address: ${address}
+Total Amount: ₹${total}`;
+
+window.open(
+`https://wa.me/919679615291?text=${encodeURIComponent(message)}`,
+"_blank"
+);
+
+});
 
 Customer: ${name}
 Phone: ${phone}
