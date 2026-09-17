@@ -1,4 +1,6 @@
-emailjs.init("XEsbJLC-C4NvU9Xu41Dua");
+emailjs.init({
+    publicKey: "XEsbJLC-C4NvU9Xu41Dua"
+});
 
 let count = 0;
 let total = 0;
@@ -19,9 +21,9 @@ function addToCart(name, price) {
 
 document.getElementById("orderBtn").addEventListener("click", function () {
 
-    const customerName = document.getElementById("name").value;
-    const customerPhone = document.getElementById("phone").value;
-    const customerAddress = document.getElementById("address").value;
+    const customerName = document.getElementById("name").value.trim();
+    const customerPhone = document.getElementById("phone").value.trim();
+    const customerAddress = document.getElementById("address").value.trim();
 
     if (
         customerName === "" ||
@@ -65,14 +67,15 @@ document.getElementById("orderBtn").addEventListener("click", function () {
         total = 0;
 
     })
-  .catch(function (error) {
+    .catch(function (error) {
 
-    console.log("FULL ERROR:", error);
+        console.log("EmailJS Error:", error);
 
-    alert(
-        "Error: " +
-        JSON.stringify(error)
-    );
+        alert(
+            "Order Failed!\n\n" +
+            JSON.stringify(error)
+        );
+
+    });
 
 });
-    });
