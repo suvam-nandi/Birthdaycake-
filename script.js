@@ -41,11 +41,12 @@ document.getElementById("orderBtn").addEventListener("click", function () {
     };
 
     emailjs.send(
-        "service_te58nun",
-        "template_3mv23bg",
-        templateParams
-    )
-    .then(function (response) {
+    "service_rsqojeb",
+    "template_3mv23bg",
+    templateParams
+   )
+  
+      .then(function (response) {
 
         console.log("SUCCESS!", response);
 
