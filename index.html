@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sweet Cake Shop</title>
+<title>Adrit Sweet Cake Shop</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <h1>🎂Adrit Sweet Cake Shop</h1>
-    <button id="cartBtn">Cart (<span id="cartCount">0</span>)</button>
+    <h1>🎂 Adrit Sweet Cake Shop</h1>
+    <button id="cartBtn">
+        Cart (<span id="cartCount">0</span>)
+    </button>
 </header>
 
 <section class="hero">
@@ -20,47 +22,68 @@
 
 <section class="cakes">
 
-<div class="cake">
-    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500" alt="">
-    <h3>Chocolate Cake</h3>
-    <p>₹599</p>
-    <button onclick="addToCart('Chocolate Cake',599)">Add To Cart</button>
-</div>
+    <div class="cake">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500" alt="Chocolate Cake">
+        <h3>Chocolate Cake</h3>
+        <p>₹599</p>
+        <button onclick="addToCart('Chocolate Cake',599)">
+            Add To Cart
+        </button>
+    </div>
 
-<div class="cake">
-    <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=500" alt="">
-    <h3>Red Velvet Cake</h3>
-    <p>₹300</p>
-    <button onclick="addToCart('Red Velvet Cake',300)">Add To Cart</button>
-</div>
+    <div class="cake">
+        <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=500" alt="Red Velvet Cake">
+        <h3>Red Velvet Cake</h3>
+        <p>₹300</p>
+        <button onclick="addToCart('Red Velvet Cake',300)">
+            Add To Cart
+        </button>
+    </div>
 
-<div class="cake">
-    <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=500" alt="">
-    <h3>Vanilla Cake</h3>
-    <p>₹250</p>
-    <button onclick="addToCart('Vanilla Cake',250)">Add To Cart</button>
-</div>
+    <div class="cake">
+        <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=500" alt="Vanilla Cake">
+        <h3>Vanilla Cake</h3>
+        <p>₹250</p>
+        <button onclick="addToCart('Vanilla Cake',250)">
+            Add To Cart
+        </button>
+    </div>
 
 </section>
 
 <section class="cart">
+
     <h2>Your Order</h2>
 
     <ul id="cartItems"></ul>
 
     <h3>Total: ₹<span id="total">0</span></h3>
 
-    <input type="text" id="name" placeholder="Customer Name">
+    <input
+        type="text"
+        id="name"
+        placeholder="Customer Name"
+    >
 
-    <input type="text" id="phone" placeholder="Phone Number">
+    <input
+        type="text"
+        id="phone"
+        placeholder="Phone Number"
+    >
 
-    <textarea id="address" placeholder="Delivery Address"></textarea>
+    <textarea
+        id="address"
+        placeholder="Delivery Address"
+    ></textarea>
 
-    <button id="orderBtn">Place Order</button>
+    <button id="orderBtn">
+        Place Order
+    </button>
+
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="script.js"></script>
-</body>    
+
 </body>
 </html>
