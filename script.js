@@ -41,7 +41,7 @@ document.getElementById("orderBtn").addEventListener("click", function () {
     };
 
     emailjs.send(
-    "service_rsqojeb",
+    "service_nd5wmfm",
     "template_3mv23bg",
     templateParams
    )
