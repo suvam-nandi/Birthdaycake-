@@ -6,7 +6,6 @@ let count = 0;
 let total = 0;
 
 function addToCart(name, price) {
-
     count++;
     total += price;
 
@@ -15,7 +14,6 @@ function addToCart(name, price) {
 
     const li = document.createElement("li");
     li.innerText = `${name} - ₹${price}`;
-
     document.getElementById("cartItems").appendChild(li);
 }
 
@@ -25,11 +23,7 @@ document.getElementById("orderBtn").addEventListener("click", function () {
     const customerPhone = document.getElementById("phone").value.trim();
     const customerAddress = document.getElementById("address").value.trim();
 
-    if (
-        customerName === "" ||
-        customerPhone === "" ||
-        customerAddress === ""
-    ) {
+    if (!customerName || !customerPhone || !customerAddress) {
         alert("Please fill all details");
         return;
     }
@@ -51,7 +45,9 @@ document.getElementById("orderBtn").addEventListener("click", function () {
         "template_3mv23bg",
         templateParams
     )
-    .then(function () {
+    .then(function (response) {
+
+        console.log("SUCCESS!", response);
 
         alert("Order Sent Successfully!");
 
@@ -69,12 +65,9 @@ document.getElementById("orderBtn").addEventListener("click", function () {
     })
     .catch(function (error) {
 
-        console.log("EmailJS Error:", error);
+        console.log("FAILED...", error);
 
-        alert(
-            "Order Failed!\n\n" +
-            JSON.stringify(error)
-        );
+        alert("Order Failed: " + JSON.stringify(error));
 
     });
 
