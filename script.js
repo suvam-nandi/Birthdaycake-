@@ -6,9 +6,11 @@ document.getElementById("orderForm").addEventListener("submit", function (e) {
   const submitBtn = document.getElementById("submitBtn");
   const statusMessage = document.getElementById("statusMessage");
 
+  // Button disabled ebong loading status
   submitBtn.disabled = true;
   submitBtn.innerText = "Placing Order...";
-  statusMessage.innerText = "";
+  statusMessage.style.color = "#4a5568";
+  statusMessage.innerText = "Processing your order...";
 
   const orderData = {
     customer_name: document.getElementById("customer_name").value,
@@ -26,17 +28,23 @@ document.getElementById("orderForm").addEventListener("submit", function (e) {
     body: JSON.stringify(orderData)
   })
     .then(() => {
-      statusMessage.style.color = "green";
-      statusMessage.innerText = "Order placed successfully!";
+      // Thank you message
+      statusMessage.style.color = "#2f855a";
+      statusMessage.innerHTML = "🎉 <strong>Thank You!</strong> Your order at Adrit's Cake Shop has been placed successfully.";
+      
+      // Popup alert-o dekhabe
+      alert("Thank You! Your order has been placed successfully.");
+
+      // Form reset
       document.getElementById("orderForm").reset();
     })
     .catch((error) => {
-      statusMessage.style.color = "red";
-      statusMessage.innerText = "Error placing order. Please try again.";
+      statusMessage.style.color = "#e53e3e";
+      statusMessage.innerText = "❌ Something went wrong. Please try placing the order again.";
       console.error("Error:", error);
     })
     .finally(() => {
       submitBtn.disabled = false;
-      submitBtn.innerText = "Place Order";
+      submitBtn.innerText = "Confirm Order";
     });
 });
