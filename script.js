@@ -1,21 +1,34 @@
 let selectedCake = "";
 
-function orderCake(name){
-    selectedCake = name;
+function orderCake(cakeName) {
+    selectedCake = cakeName;
     document.getElementById("orderForm").style.display = "block";
 }
 
-async function submitOrder(){
+function closePopup() {
+    document.getElementById("orderForm").style.display = "none";
+}
+
+async function submitOrder() {
+
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+
+    if (!name || !phone || !address) {
+        alert("Please fill all fields.");
+        return;
+    }
 
     const data = {
-        name: document.getElementById("name").value,
-        phone: document.getElementById("phone").value,
-        address: document.getElementById("address").value,
+        name: name,
+        phone: phone,
+        address: address,
         cake: selectedCake,
         qty: 1
     };
 
-    try{
+    try {
 
         const response = await fetch(
             "https://script.google.com/macros/s/AKfycbxQyWuhkMyNsYHYFQuEK1CoZIbvTH7cObKc-XKkRu_pXFuOYv9GP5fQPv-IQBp3CEM/exec",
@@ -28,16 +41,23 @@ async function submitOrder(){
         const result = await response.json();
 
         alert(
-            "Thank You For Your Order ❤️\n\nOrder ID: " +
-            result.orderId
+            "🎉 Thank You For Your Order!\n\n" +
+            "Cake: " + selectedCake + "\n\n" +
+            "Order ID: " + result.orderId
         );
 
-        document.getElementById("orderForm").style.display = "none";
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("address").value = "";
 
-    }catch(error){
+        closePopup();
 
-        alert("Order Failed. Please Try Again.");
+    } catch (error) {
 
         console.error(error);
+
+        alert(
+            "Order Failed!\nPlease try again."
+        );
     }
 }
