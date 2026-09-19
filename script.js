@@ -1,50 +1,43 @@
-const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbx1QKXwVUdAvvSpDYj2v9X3XG1N1ESOTOfE8pPciJSg_78iPx4chokhvjNJAi5GpF4/exec";
+let selectedCake = "";
 
-document.getElementById("orderForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+function orderCake(name){
+    selectedCake = name;
+    document.getElementById("orderForm").style.display = "block";
+}
 
-  const submitBtn = document.getElementById("submitBtn");
-  const statusMessage = document.getElementById("statusMessage");
+async function submitOrder(){
 
-  // Button disabled ebong loading status
-  submitBtn.disabled = true;
-  submitBtn.innerText = "Placing Order...";
-  statusMessage.style.color = "#4a5568";
-  statusMessage.innerText = "Processing your order...";
+    const data = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        address: document.getElementById("address").value,
+        cake: selectedCake,
+        qty: 1
+    };
 
-  const orderData = {
-    customer_name: document.getElementById("customer_name").value,
-    customer_phone: document.getElementById("customer_phone").value,
-    customer_address: document.getElementById("customer_address").value,
-    total_amount: document.getElementById("total_amount").value
-  };
+    try{
 
-  fetch(GOOGLE_SHEET_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(orderData)
-  })
-    .then(() => {
-      // Thank you message
-      statusMessage.style.color = "#2f855a";
-      statusMessage.innerHTML = "🎉 <strong>Thank You!</strong> Your order at Adrit's Cake Shop has been placed successfully.";
-      
-      // Popup alert-o dekhabe
-      alert("Thank You! Your order has been placed successfully.");
+        const response = await fetch(
+            "https://script.google.com/macros/s/AKfycbxQyWuhkMyNsYHYFQuEK1CoZIbvTH7cObKc-XKkRu_pXFuOYv9GP5fQPv-IQBp3CEM/exec",
+            {
+                method: "POST",
+                body: JSON.stringify(data)
+            }
+        );
 
-      // Form reset
-      document.getElementById("orderForm").reset();
-    })
-    .catch((error) => {
-      statusMessage.style.color = "#e53e3e";
-      statusMessage.innerText = "❌ Something went wrong. Please try placing the order again.";
-      console.error("Error:", error);
-    })
-    .finally(() => {
-      submitBtn.disabled = false;
-      submitBtn.innerText = "Confirm Order";
-    });
-});
+        const result = await response.json();
+
+        alert(
+            "Thank You For Your Order ❤️\n\nOrder ID: " +
+            result.orderId
+        );
+
+        document.getElementById("orderForm").style.display = "none";
+
+    }catch(error){
+
+        alert("Order Failed. Please Try Again.");
+
+        console.error(error);
+    }
+}
