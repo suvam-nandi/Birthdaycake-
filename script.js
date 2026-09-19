@@ -1,74 +1,42 @@
-emailjs.init({
-    publicKey: "mkFMVd9xqYDjvCMwd"
-});
+const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbx1QKXwVUdAvvSpDYj2v9X3XG1N1ESOTOfE8pPciJSg_78iPx4chokhvjNJAi5GpF4/exec";
 
-let count = 0;
-let total = 0;
+document.getElementById("orderForm").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-function addToCart(name, price) {
-    count++;
-    total += price;
+  const submitBtn = document.getElementById("submitBtn");
+  const statusMessage = document.getElementById("statusMessage");
 
-    document.getElementById("cartCount").innerText = count;
-    document.getElementById("total").innerText = total;
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Placing Order...";
+  statusMessage.innerText = "";
 
-    const li = document.createElement("li");
-    li.innerText = `${name} - ₹${price}`;
-    document.getElementById("cartItems").appendChild(li);
-}
+  const orderData = {
+    customer_name: document.getElementById("customer_name").value,
+    customer_phone: document.getElementById("customer_phone").value,
+    customer_address: document.getElementById("customer_address").value,
+    total_amount: document.getElementById("total_amount").value
+  };
 
-document.getElementById("orderBtn").addEventListener("click", function () {
-
-    const customerName = document.getElementById("name").value.trim();
-    const customerPhone = document.getElementById("phone").value.trim();
-    const customerAddress = document.getElementById("address").value.trim();
-
-    if (!customerName || !customerPhone || !customerAddress) {
-        alert("Please fill all details");
-        return;
-    }
-
-    if (total === 0) {
-        alert("Please add at least one cake");
-        return;
-    }
-
-    const templateParams = {
-        customer_name: customerName,
-        customer_phone: customerPhone,
-        customer_address: customerAddress,
-        total_amount: total
-    };
-
-    emailjs.send(
-        "service_bg25yaz",     // Updated Service ID
-        "template_e8fibqr",     // Updated Template ID
-        templateParams
-    )
-    .then(function (response) {
-
-        console.log("SUCCESS!", response);
-
-        alert("Order Sent Successfully!");
-
-        document.getElementById("name").value = "";
-        document.getElementById("phone").value = "";
-        document.getElementById("address").value = "";
-
-        document.getElementById("cartItems").innerHTML = "";
-        document.getElementById("cartCount").innerText = "0";
-        document.getElementById("total").innerText = "0";
-
-        count = 0;
-        total = 0;
-
+  fetch(GOOGLE_SHEET_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(orderData)
+  })
+    .then(() => {
+      statusMessage.style.color = "green";
+      statusMessage.innerText = "Order placed successfully!";
+      document.getElementById("orderForm").reset();
     })
-    .catch(function (error) {
-
-        console.log("FAILED...", error);
-
-        alert("Order Failed: " + JSON.stringify(error));
-
+    .catch((error) => {
+      statusMessage.style.color = "red";
+      statusMessage.innerText = "Error placing order. Please try again.";
+      console.error("Error:", error);
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Place Order";
     });
-
 });
