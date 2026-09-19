@@ -1,57 +1,252 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adrit's Cake Shop - Online Order</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adrit Cake Shop</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-  <div class="card-container">
-    <!-- Hero Image & Shop Header -->
-    <div class="card-header">
-      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80" alt="Delicious Chocolate Cake" class="cake-image">
-      <div class="header-overlay">
-        <h1>Adrit's Cake Shop</h1>
-        <p>Freshly Baked Delicious Cakes for Every Occasion</p>
-      </div>
+<!-- HEADER -->
+
+<header>
+    <div class="logo">
+        🎂 Adrit Cake Shop
     </div>
 
-    <!-- Order Form -->
-    <div class="card-body">
-      <h2>Place Your Order</h2>
-      <form id="orderForm">
-        <div class="form-group">
-          <label for="customer_name">Customer Name</label>
-          <input type="text" id="customer_name" required placeholder="Enter full name">
-        </div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#cakes">Cakes</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
 
-        <div class="form-group">
-          <label for="customer_phone">Phone Number</label>
-          <input type="tel" id="customer_phone" required placeholder="Enter 10-digit phone number">
-        </div>
+<!-- HERO SECTION -->
 
-        <div class="form-group">
-          <label for="customer_address">Delivery Address</label>
-          <textarea id="customer_address" required placeholder="House no, Street name, Area, City"></textarea>
-        </div>
+<section class="hero" id="home">
 
-        <div class="form-group">
-          <label for="total_amount">Total Amount (₹)</label>
-          <input type="number" id="total_amount" required placeholder="e.g. 650">
-        </div>
+    <div class="hero-content">
 
-        <button type="submit" id="submitBtn">Confirm Order</button>
-      </form>
+        <h1>Fresh Cakes For Every Celebration</h1>
 
-      <div id="statusMessage"></div>
+        <p>
+            Birthday, Anniversary, Wedding &
+            Custom Cakes Available.
+        </p>
+
+        <a href="#cakes" class="hero-btn">
+            Order Now
+        </a>
+
     </div>
-  </div>
 
-  <script src="script.js"></script>
+</section>
+
+<!-- CAKES -->
+
+<section id="cakes">
+
+    <h2 class="section-title">
+        Our Special Cakes
+    </h2>
+
+    <div class="cakes">
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80">
+            <h3>Chocolate Truffle Cake</h3>
+            <p>₹499</p>
+            <button onclick="orderCake('Chocolate Truffle Cake')">
+                Order Now
+            </button>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80">
+            <h3>Birthday Special Cake</h3>
+            <p>₹699</p>
+            <button onclick="orderCake('Birthday Special Cake')">
+                Order Now
+            </button>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=800&q=80">
+            <h3>Red Velvet Cake</h3>
+            <p>₹799</p>
+            <button onclick="orderCake('Red Velvet Cake')">
+                Order Now
+            </button>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?auto=format&fit=crop&w=800&q=80">
+            <h3>Black Forest Cake</h3>
+            <p>₹599</p>
+            <button onclick="orderCake('Black Forest Cake')">
+                Order Now
+            </button>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=800&q=80">
+            <h3>Fruit Cake</h3>
+            <p>₹649</p>
+            <button onclick="orderCake('Fruit Cake')">
+                Order Now
+            </button>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=800&q=80">
+            <h3>Wedding Cake</h3>
+            <p>₹1499</p>
+            <button onclick="orderCake('Wedding Cake')">
+                Order Now
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- REVIEWS -->
+
+<section id="reviews">
+
+    <h2 class="section-title">
+        Customer Reviews
+    </h2>
+
+    <div class="reviews">
+
+        <div class="review-box">
+            ⭐⭐⭐⭐⭐
+            <p>
+                Best cake quality and fast delivery.
+            </p>
+            <h4>- Rahul</h4>
+        </div>
+
+        <div class="review-box">
+            ⭐⭐⭐⭐⭐
+            <p>
+                Amazing taste and beautiful decoration.
+            </p>
+            <h4>- Priya</h4>
+        </div>
+
+        <div class="review-box">
+            ⭐⭐⭐⭐⭐
+            <p>
+                Ordered birthday cake. Everyone loved it.
+            </p>
+            <h4>- Sayan</h4>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ORDER POPUP -->
+
+<div id="orderForm" class="popup">
+
+    <div class="popup-content">
+
+        <h2>Place Your Order</h2>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Your Name"
+            required
+        >
+
+        <input
+            type="tel"
+            id="phone"
+            placeholder="Phone Number"
+            required
+        >
+
+        <textarea
+            id="address"
+            placeholder="Delivery Address"
+            required
+        ></textarea>
+
+        <button onclick="submitOrder()">
+            Confirm Order
+        </button>
+
+        <button
+            class="close-btn"
+            onclick="closePopup()"
+        >
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+    <h2 class="section-title">
+        Contact Us
+    </h2>
+
+    <div class="contact-box">
+
+        <p>
+            📞 9679615291
+        </p>
+
+        <p>
+            📍 Mankanali, Bankura, West Bengal
+        </p>
+
+        <p>
+            💵 Cash On Delivery Available
+        </p>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>Adrit Cake Shop</h3>
+
+    <p>
+        Fresh Cakes | Fast Delivery | Best Quality
+    </p>
+
+</footer>
+
+<!-- WHATSAPP BUTTON -->
+
+<a
+href="https://wa.me/919679615291"
+target="_blank"
+class="whatsapp"
+>
+WhatsApp
+</a>
+
+<script src="script.js"></script>
+
 </body>
 </html>
